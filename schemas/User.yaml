@@ -11,3 +11,4 @@ properties:
   password:
     description: The secure password of the user. must be greater than 8 characters long
     type: string
+    
