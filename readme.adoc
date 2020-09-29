@@ -1,0 +1,21 @@
+# GROOVYSCHOOL API DOCUMENTATION
+
+This project contains the documentation for the GROOVYSCHOOL REST API
+
+## Prerequisites
+
+In order to run this project, you will need the following tools installed.
+
+### 1. The node package manager npm. 
+This comes bundled with node.js and can be installed by following the instructions on the link:https://nodejs.org/en/download/[Node.js official download page]
+
+## How to run
+
+. Clone this repository into a folder of your choice on your computer.
+. Open your terminal and move to the cloned directory
+. Install Redoc CLI with the command `npm i redoc-cli g`
+.. Serve the spec file with `npx redoc-cli serve api-spec.yaml`
+. Create a deployable zero-dependency HTML file
+.. Generate the html with `npx redoc-cli bundle api-spec.yaml` 
+
+More info about the CLI can be found link:https://github.com/Redocly/redoc/blob/master/cli/README.md[on the redoc site]
