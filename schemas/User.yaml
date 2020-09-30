@@ -1,0 +1,14 @@
+title: User
+type: object
+required:
+  - username
+  - password
+properties:
+  username:
+    description: The email address of the user
+    type: string
+    format: email
+  password:
+    description: The secure password of the user. must be greater than 8 characters long
+    type: string
+    
