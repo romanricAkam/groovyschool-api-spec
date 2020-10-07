@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: groovyschool api
+  description: groovyschool api
+  termOfService: https://groovyshool.org/termsofservice
+  contact:
+    name: GroovySchool API
+    url: smartbear.com 
+    email: test@test.com
+    licence:
+      name: smartbear licence
+      url: https://grooyschool.com/licence
+
+# work done by Romanric Akam and Tatan Collins 
+
+paths:          
+  /users/{category}:
+    title: User
+    type: object
+    required: true
+      - username
+      - password
+      - gender
+      - phone 
+    get: 
+      description: this gets info about a user in the system
+      parameters:
+        - name: {category}
+          in: path
+          required: true
+          description: this aims to search for a user in the system with the category specified.
+          schema:
+            description: describes the search parameters.
+    
+    response: 
+      200:
+        description: successful pull of user info.
+
+
+
+      
+#  model for the student user starts here ,it give sthe fields for the get and post request for a student
+
+  /users/student:
+    get:
+      description: obtain information about a set of users
+      $ref: '#/component/parameter'
+
+      responses:
+        200:
+          description: successful pull of employee info
+          content:
+           application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/component/schema/user'
+                  - $ref: '#/component/schema/student-response'
+          
+  # post operations and parameters are thesame for all users
+    post:
+        description: creates a new users
+        $ref: '#/component/userPostInfo'
+
+#  model for the mentor user starts here ,it give sthe fields for the get and post request for a mentor
+  
+  /users/mentor:
+    get:
+      description: obtain information about a set of users
+      $ref: '#/component/parameter'
+
+      responses:
+        200:
+          description: successful pull of employee info
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/component/schema/user'
+                  - $ref: '#/component/schema/mentor-response'
+
+  
+    post:
+        description: creates a new users
+        $ref: '#/component/userPostInfo'
+
+#  model for the intructor user starts here ,it give sthe fields for the get and post request for a intructor
+
+  /users/instructor:
+    get:
+      description: obtain information about a set of users
+      $ref: '#/component/parameter'
+
+      responses:
+        200:
+          description: successful pull of employee info
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/component/schema/user'
+                  - $ref: '#/component/schema/instructor-response'
+
+
+  # post operations and parameters are thesame for all users
+    post:
+        description: creates a new users
+        $ref: '#/component/userPostInfo'
+  
+components:
+  parameters:
+    - name: {category}
+      in: query
+      required: True
+      schema:
+        type: interger
+        example: student
+
+  schemas:
+    user:
+      description: model containing user information
+      properties:
+        username:
+          required: true
+          type: string
+          example: Romanric
+        email:
+          description: the email address of the user.
+          type: string
+          example: test@test.com
+        password:
+          description: The secure password of the user. must be greater than 8 characters long
+          type: string
+        phone:
+          description: phone number of the user, use for verifiication.
+          type: string
+          example: ysf684sgd76g8r
+        gender:
+          description: The sex or  of the user in our system
+          type: string
+          example: male
+        nationality:
+          description: the country of origin of the user.
+          type: string
+          example: cameroon
+
+    student-response:
+      description: this returns all the academic info about the student including courses taking, course instructors and mentors.
+      properties:
+        coursesTaking:
+          description: this returns the list of courses a student is taking.
+          required: true
+          type: string
+          example: groovy basics
+        coursesInstructors:
+          description: this returns the list of intructor/s for the cousres the student is taking.
+          required: true
+          type: string
+          example: Dr xyz
+        coursesMentors:
+          description: this returns the list ofmentors for a particular course the student is taking.
+          required: true
+          type: string
+          example: mr xyz
+
+    mentor-response:
+      description: this returns the professional info of the mentor, which includes the list of students he is mentoring,courses and his department of specialty.
+      properties:
+        coursesMentored:
+          description: this returns the number of courses he has mentored.
+          required: true
+          type: interger
+          example: 64
+        studentsMentored: 
+          description: this returns the number of students he/she has mentored.
+          required: true
+          type: interger
+          example: 45
+        department: 
+          description: this returns the specialty of the mentor.
+          required: true
+          type: string
+          example: artificail interligience
+    
+    instructor-response:
+      description:
+      properties:
+        coursesCreated: 
+          description: this returns a a list of the courses he has created.
+          required: True
+          type: string
+        studentsTaught: 
+          description: this returns the number of students this iinstructor has taught
+          type: interger
+        studentsRating: 
+          description: this returns the list of student review.
+          type: string
+          example: very good teacher, explains well
+
+
+
+
+  userPostInfo: 
+    requestBody:
+      required: True
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: '#/components/schemas/user'
+    responses:
+      200:
+        description: succesfully crated a new users
+

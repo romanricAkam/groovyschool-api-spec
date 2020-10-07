@@ -4,11 +4,26 @@ required:
   - username
   - password
 properties:
-  username:
-    description: The email address of the user
+  name:
+    required: true
     type: string
-    format: email
+    example: Romanric
+  email:
+    description: the email address of the user, it willa lso stand for hisuser name for login purposes.
+    type: string
+    example: test@test.com
   password:
     description: The secure password of the user. must be greater than 8 characters long
     type: string
-    
+  phone:
+    description: phone number of the user, use for verifiication.
+    type: string
+    example: ysf684sgd768r
+  gender:
+    description: The sex or  of the user in our system
+    type: string
+    example: male
+  nationality:
+    description: the country of origin of the user.
+    type: string
+    example: cameroon
